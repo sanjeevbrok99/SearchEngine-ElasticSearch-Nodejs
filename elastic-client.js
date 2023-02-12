@@ -1,7 +1,7 @@
-import  { Client } from "@elastic/elasticsearch";
+const { Client } = require("@elastic/elasticsearch");
 require("dotenv").config({ path: ".env" });
 
-export const elasticClient = new Client({
+const elasticClient = new Client({
     cloud: {
       id: process.env.ELASTIC_CLOUD_ID,
     },
@@ -10,3 +10,5 @@ export const elasticClient = new Client({
       password: process.env.ELASTIC_PASSWORD,
     },
   });
+
+  module.exports = elasticClient;
