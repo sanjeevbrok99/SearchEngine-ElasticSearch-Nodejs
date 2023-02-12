@@ -14,8 +14,16 @@ app.post("/create-post", async (req, res) => {
       document: {
         title: req.body.title,
         author: req.body.author,
-        content: req.body.content,
+        content: req.body.content, 
       },
+    });
+  
+    res.json(result);
+  });
+  app.delete("/remove-post", async (req, res) => {
+    const result = await elasticClient.delete({
+      index: "posts",
+      id: req.query.id,
     });
   
     res.json(result);
