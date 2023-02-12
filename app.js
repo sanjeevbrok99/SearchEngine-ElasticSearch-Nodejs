@@ -28,3 +28,21 @@ app.post("/create-post", async (req, res) => {
   
     res.json(result);
   });
+
+  app.get("/search", async (req, res) => {
+    const result = await elasticClient.search({
+      index: "posts",
+      query: { fuzzy: { title: req.query.query } },
+    });
+  
+    res.json(result);
+  });
+  app.get("/posts", async (req, res) => {
+    const result = await elasticClient.search({
+      index: "posts",
+      query: { match_all: {} },
+    });
+  
+    res.send(result);
+  });
+  
